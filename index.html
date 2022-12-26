@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<head>
+
+    <title>Flower Game</title>
+
+    <script src="https://aframe.io/releases/1.0.4/aframe.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/n5ro/aframe-physics-system@v4.0.1/dist/aframe-physics-system.min.js"></script>
+    <script src="https://unpkg.com/aframe-environment-component@1.1.0/dist/aframe-environment-component.min.js"></script>
+    <script src="https://recast-api.donmccurdy.com/aframe-inspector-plugin-recast.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/donmccurdy/aframe-extras@v6.1.1/dist/aframe-extras.min.js"></script>
+
+    <script src="./game.js"></script>
+    <script src="./objects/flower.js"></script>
+</head>
+<body>
+    <a-scene id="scene" inspector-plugin-recast>
+
+        <a-assets>
+            <a-asset-item id="basket" src="./assets/basket/scene.gltf"></a-asset-item>
+            <a-asset-item id="bee" src="./assets/bee/scene.gltf"></a-asset-item>
+            <a-asset-item id="cat" src="./assets/cat/scene.gltf"></a-asset-item>
+            <a-asset-item id="flower1" src="./assets/flower1 - dandelion/scene.gltf"></a-asset-item>
+            <a-asset-item id="flower2" src="./assets/flower2 - tulip/scene.gltf"></a-asset-item>
+            <a-asset-item id="flower3" src="./assets/flower3 - rose/scene.gltf"></a-asset-item>
+            <a-asset-item id="flower4" src="./assets/flower4 - orchid/scene.gltf"></a-asset-item>
+            <a-asset-item id="flower5" src="./assets/flower5 - lily/scene.gltf"></a-asset-item>
+            <a-asset-item id="collider" src="./assets/nav_mesh/navmesh.gltf"></a-asset-item>
+        </a-assets>
+
+        <a-entity id="environment" environment="preset: forest; skytype: gradient; lighting: point"></a-entity>
+
+        <!--Test entities-->
+        <a-entity id="bee" gltf-model="#bee" position="1 1 1" scale="0.3 0.3 0.3" animation-mixer static-body
+            animation="property: position; to: 10 0 -15; dur: 20000; easing: linear; loop: true; dir:alternate"></a-entity>
+        <a-entity id="cat" gltf-model="#cat" position="-1 0 1" scale="0.003 0.003 0.003" animation-mixer static-body
+            animation="property: position; to: -1 0 2; dur: 1000; easing: linear; loop: true; dir:alternate"></a-entity>
+        <a-entity id="flower1" gltf-model="#flower1" position="3 0 0" scale="0.05 0.05 0.05"></a-entity>
+        <a-entity id="flower2" gltf-model="#flower2" position="4 1 2" scale="0.05 0.05 0.05"></a-entity>
+        <a-entity id="flower3" gltf-model="#flower3" position="4 0 -2" scale="0.4 0.4 0.4"></a-entity>
+        <a-entity id="flower4" gltf-model="#flower4" position="2 0 4" scale="0.1 0.1 0.1"></a-entity>
+        <a-entity id="flower5" gltf-model="#flower5" position="1 0 -1" scale="0.005 0.005 0.005"></a-entity>
+
+        <a-entity id="navigation-mesh" gltf-model="#collider" visible="false" nav-mesh></a-entity>
+        <a-entity dandelions></a-entity>
+
+        <a-entity id="camera-rig" wasd-controls movement-controls="speed: 0.3; constrainToNavMesh: true" position="0 1 2" game>
+            <a-entity id="camera" position="0 0 0" look-controls="pointerLockEnabled: false" game>
+                <a-entity id="basket" gltf-model="#basket" position="-1 -2 1" scale="0.03 0.03 0.03"></a-entity>
+            </a-entity>
+            <a-cursor></a-cursor>
+        </a-entity>
+
+        <a-plane id="ground" repeat="5 5" position="0 1 0" rotation="-90 0 0" height="200" width="200" color="#FBF2D4"
+            static-body visible="false">
+        </a-plane>
+    </a-scene>
+</body>
